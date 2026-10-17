@@ -9,6 +9,7 @@ verbrauchten Solarstrom** (unentgeltliche Wertabgabe, § 3 Abs. 1b UStG).
 
 ## Was es kann
 
+- **Hochladen:** Knopf „Datei hochladen“ oben rechts oder Datei einfach ins Fenster ziehen – danach springt die Übersicht auf das Jahr der Datei.
 - **Eingangsordner:** neue CSV/XLSX werden automatisch eingelesen und nach `erledigt/` verschoben (fehlerhafte nach `fehler/`, mit Grund als `.txt`).
   Alternativ per Drag & Drop in der Oberfläche. Doppelte Dateien werden erkannt, überlappende Zeiträume nicht doppelt gezählt.
 - **Dashboard:** Erzeugung, Eigenverbrauch, Einspeisung, Netzbezug, Autarkie, Eigenverbrauchsquote, Umsatzsteuer; Monatsdiagramm
@@ -38,7 +39,18 @@ Semikolon und Dezimalkomma werden ebenfalls erkannt; Spalten mit „(kWh)“ wer
 
 Das Image wird bei jedem Push auf `main` von GitHub gebaut: `ghcr.io/flexisticker/sonnen-csv-studio:latest`.
 
-Docker → **Add Container**:
+**Am einfachsten mit der Vorlage** (dann sind WebUI, Icon, Port und Ordner schon eingetragen): auf dem Unraid-Server im Terminal
+
+```
+wget -O /boot/config/plugins/dockerMan/templates-user/my-sonnen-csv-studio.xml \
+  https://raw.githubusercontent.com/flexisticker/Sonnen-CSV-Studio/main/unraid/sonnen-csv-studio.xml
+```
+
+dann Docker → **Add Container** → oben bei „Template“ **sonnen-csv-studio** wählen → Apply.
+
+Oder von Hand: Docker → **Add Container** (für den WebUI-Eintrag oben rechts „Basic View“ auf **Advanced View** stellen und
+bei **WebUI** `http://[IP]:[PORT:8080]/` eintragen, bei **Icon URL**
+`https://raw.githubusercontent.com/flexisticker/Sonnen-CSV-Studio/main/public/icon.png`):
 
 | Feld | Wert |
 |---|---|

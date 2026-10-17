@@ -69,7 +69,7 @@ function render() {
 function renderWarnings() {
   const s = state
   const out = []
-  if (!s.files.length) out.push(`<div class="alert info">Noch keine Daten. Lege den sonnen-Export in den Eingangsordner oder lade ihn unter <b>Daten</b> hoch.</div>`)
+  if (!s.files.length) out.push(`<div class="alert info">Noch keine Daten. Oben auf <b>Datei hochladen</b> klicken, die Datei einfach ins Fenster ziehen oder den sonnen-Export in den Eingangsordner legen.</div>`)
   if (s.settings.plant.taxSelfUse && !s.settings.prices.length) out.push(`<div class="alert error">Kein Strompreis eingetragen – ohne Preis gibt es keine Bemessungsgrundlage. <a href="#" data-go="settings">Einstellungen öffnen</a></div>`)
   for (const w of s.warnings) out.push(`<div class="alert ${w.level}">${esc(w.text)}</div>`)
   $('#warnings').innerHTML = out.join('')
@@ -261,18 +261,30 @@ function renderData() {
 }
 
 async function upload(files) {
+  let lastYear = null
   for (const f of files) {
     try {
       const r = await fetch(`/api/upload?name=${encodeURIComponent(f.name)}`, { method: 'POST', headers: { 'X-Sonnen-Studio': '1' }, body: f })
       const d = await r.json()
       if (!r.ok) throw new Error(d.error)
-      toast(d.duplicate ? `${f.name}: schon eingelesen` : `${f.name}: ${d.file.days} Tage eingelesen`)
+      toast(d.duplicate ? `${f.name}: schon eingelesen` : `${f.name}: ${d.file.days} Tage eingelesen (${fmtDate(d.file.from)} – ${fmtDate(d.file.to)})`)
+      lastYear = +d.file.to.slice(0, 4)
     } catch (e) {
       toast(`${f.name}: ${e.message}`)
     }
   }
+  // nach dem Hochladen direkt das Ergebnis zeigen
+  if (lastYear) { year = lastYear; showTab('overview') }
   load()
 }
+$('#topUpload').addEventListener('change', (e) => { upload([...e.target.files]); e.target.value = '' })
+// Datei irgendwo ins Fenster ziehen
+addEventListener('dragover', (e) => { if (e.dataTransfer?.types?.includes('Files')) e.preventDefault() })
+addEventListener('drop', (e) => {
+  if (e.target.closest?.('#drop') || !e.dataTransfer?.files?.length) return
+  e.preventDefault()
+  upload([...e.dataTransfer.files].filter((f) => /\.(csv|xlsx)$/i.test(f.name)))
+})
 const drop = $('#drop')
 $('#fileInput').addEventListener('change', (e) => upload([...e.target.files]))
 drop.addEventListener('dragover', (e) => { e.preventDefault(); drop.classList.add('over') })

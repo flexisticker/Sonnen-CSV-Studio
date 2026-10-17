@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>sonnen-csv-studio</Name>
+  <Repository>ghcr.io/flexisticker/sonnen-csv-studio:latest</Repository>
+  <Registry>https://github.com/flexisticker/Sonnen-CSV-Studio/pkgs/container/sonnen-csv-studio</Registry>
+  <Network>bridge</Network>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/flexisticker/Sonnen-CSV-Studio</Support>
+  <Project>https://github.com/flexisticker/Sonnen-CSV-Studio</Project>
+  <Overview>Auswertung der sonnenBatterie-Exporte (CSV/XLSX): Dashboard, Umsatzsteuer auf den privaten Eigenverbrauch, PDF-Berichte für Steuerberater und Finanzamt.</Overview>
+  <Category>Tools: Productivity:</Category>
+  <WebUI>http://[IP]:[PORT:8080]/</WebUI>
+  <Icon>https://raw.githubusercontent.com/flexisticker/Sonnen-CSV-Studio/main/public/icon.png</Icon>
+  <Config Name="WebUI-Port" Target="8080" Default="8095" Mode="tcp" Description="Port der Weboberfläche" Type="Port" Display="always" Required="true" Mask="false">8095</Config>
+  <Config Name="Daten" Target="/data" Default="/mnt/user/appdata/sonnen-csv-studio" Mode="rw" Description="Einstellungen, eingelesene Werte, Archiv der Originaldateien" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/sonnen-csv-studio</Config>
+  <Config Name="Eingangsordner" Target="/import" Default="/mnt/user/flexisticker/pv-eingang" Mode="rw" Description="sonnen-Exporte hier ablegen; Sicherungen landen in /import/sicherung" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/flexisticker/pv-eingang</Config>
+  <Config Name="Passwort" Target="PASSWORD" Default="" Mode="" Description="optional: Passwort für die Anmeldung (Benutzer admin)" Type="Variable" Display="always" Required="false" Mask="true"></Config>
+  <Config Name="Zeitzone" Target="TZ" Default="Europe/Berlin" Mode="" Description="Zeitzone" Type="Variable" Display="advanced" Required="false" Mask="false">Europe/Berlin</Config>
+</Container>

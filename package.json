@@ -1,6 +1,6 @@
 {
   "name": "sonnen-csv-studio",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Auswertung der sonnen-Speicher-Exporte (CSV/XLSX): Dashboard, Umsatzsteuer auf den Eigenverbrauch, PDF-Berichte für Steuerberater und Finanzamt",
   "private": true,
   "type": "module",

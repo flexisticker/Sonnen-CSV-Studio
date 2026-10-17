@@ -41,4 +41,7 @@ Tageswerte in Wh, 353 Tage; Lücke 25.05.–05.06.2025 (12 Tage, wird geschätzt
   **Nicht getestet:** echte XLSX von sonnen, Unraid-Container, Zählerabgleich mit echten Netze-BW-Ständen.
 - 1.1.0 (17.10.2026): Wunsch Kunde „Daten immer haben“ → automatische Sicherung + Download/Einspielen; Startwerte EnBW-Preis und
   Name Flexisticker (gelten nur, solange noch keine `settings.json` existiert). Ohne Firmenanteil ergibt 2025: 276,24 € USt.
+- 1.2.0 (17.10.2026): Knopf „Datei hochladen“ in der Kopfleiste + Ziehen ins ganze Fenster (springt danach zur Übersicht/zum Jahr).
+  Unraid-WebUI: Labels `net.unraid.docker.webui/icon` im Dockerfile, Vorlage `unraid/sonnen-csv-studio.xml`, Icon `public/icon.png`
+  (aus icon.svg gerendert). Ein schon angelegter Container übernimmt WebUI nur über die Vorlage bzw. Advanced View → WebUI.
 - Offen/Ideen: Netze-BW-Gutschriften (tatsächliche Vergütung) erfassen, Teiltage optional schätzen, Vorjahresvergleich.
