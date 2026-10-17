@@ -25,7 +25,7 @@ function walk(dir, prefix = '') {
 export async function makeZip() {
   const zip = new JSZip()
   for (const rel of walk(DATA_DIR)) zip.file(rel, fs.readFileSync(path.join(DATA_DIR, rel)))
-  zip.file('LIESMICH.txt', 'Sicherung von Steuer-Studio.\r\nWiederherstellen: in der Oberfläche unter Daten → „Sicherung einspielen“\r\noder den Inhalt in den Datenordner (/data) entpacken.\r\nOriginaldateien von sonnen liegen unter archiv/.\r\n')
+  zip.file('LIESMICH.txt', 'Sicherung von Sonnen-CSV-Studio.\r\nWiederherstellen: in der Oberfläche unter Daten → „Sicherung einspielen“\r\noder den Inhalt in den Datenordner (/data) entpacken.\r\nOriginaldateien von sonnen liegen unter archiv/.\r\n')
   return zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE', compressionOptions: { level: 6 } })
 }
 
@@ -34,7 +34,7 @@ export async function restoreZip(buf) {
   try { zip = await JSZip.loadAsync(buf) } catch { throw new Error('Keine gültige ZIP-Datei.') }
   const entries = Object.values(zip.files).filter((f) => !f.dir && f.name !== 'LIESMICH.txt')
   const bad = entries.filter((f) => !ALLOWED.test(f.name))
-  if (!entries.some((f) => f.name === 'files.json') || bad.length) throw new Error('Das ist keine Sicherung von Steuer-Studio.')
+  if (!entries.some((f) => f.name === 'files.json') || bad.length) throw new Error('Das ist keine Sicherung von Sonnen-CSV-Studio.')
   // vorher den aktuellen Stand sichern
   await autoBackup({ force: true, tag: 'vor-wiederherstellung' })
   for (const f of entries) {

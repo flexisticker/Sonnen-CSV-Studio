@@ -1,4 +1,4 @@
-# Steuer-Studio (früher Sonnen-CSV-Studio) – Unterlagen für Steuerberater und Finanzamt, für Unraid
+# Sonnen-CSV-Studio – Auswertung der sonnen-Exporte für Unraid
 FROM node:22-slim
 WORKDIR /app
 ENV NODE_ENV=production \
@@ -17,7 +17,7 @@ ENV APP_VERSION=$APP_VERSION APP_BUILD=$APP_BUILD APP_COMMIT=$APP_COMMIT
 # Unraid: WebUI-Eintrag im Container-Menü und Icon
 LABEL net.unraid.docker.webui="http://[IP]:[PORT:8080]/" \
       net.unraid.docker.icon="https://raw.githubusercontent.com/flexisticker/Sonnen-CSV-Studio/main/public/icon.png" \
-      org.opencontainers.image.title="Steuer-Studio" \
+      org.opencontainers.image.title="Sonnen-CSV-Studio" \
       org.opencontainers.image.source="https://github.com/flexisticker/Sonnen-CSV-Studio"
 EXPOSE 8080
 VOLUME ["/data", "/import"]

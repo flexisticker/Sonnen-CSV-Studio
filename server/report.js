@@ -22,7 +22,7 @@ const METHOD = {
 }
 
 function newDoc(title) {
-  const doc = new PDFDocument({ size: 'A4', margins: { top: 50, bottom: 60, left: 50, right: 50 }, bufferPages: true, info: { Title: title, Creator: `Steuer-Studio ${VERSION}` } })
+  const doc = new PDFDocument({ size: 'A4', margins: { top: 50, bottom: 60, left: 50, right: 50 }, bufferPages: true, info: { Title: title, Creator: `Sonnen-CSV-Studio ${VERSION}` } })
   doc.font('Helvetica').fillColor(COLOR.ink)
   return doc
 }
@@ -245,7 +245,7 @@ export function yearReport(a, s, files, allDays) {
   doc.moveDown(0.6)
   para(doc, 'Dieser Bericht ist eine Rechenhilfe und keine Steuerberatung. Maßgeblich sind die Festlegungen des Steuerberaters.', { size: 8, color: COLOR.muted })
 
-  footer(doc, `PV-Jahresbericht ${a.year} · Steuer-Studio ${VERSION}`)
+  footer(doc, `PV-Jahresbericht ${a.year} · Sonnen-CSV-Studio ${VERSION}`)
   return doc
 }
 
@@ -284,6 +284,6 @@ export function periodReport(a, s, periodId) {
   }
   doc.moveDown(0.6)
   para(doc, 'Rechenhilfe, keine Steuerberatung. Messwerte aus dem sonnen-Speicher (nicht geeicht).', { size: 8, color: COLOR.muted })
-  footer(doc, `PV-Voranmeldung ${title} · Steuer-Studio ${VERSION}`)
+  footer(doc, `PV-Voranmeldung ${title} · Sonnen-CSV-Studio ${VERSION}`)
   return doc
 }

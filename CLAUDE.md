@@ -1,4 +1,4 @@
-# Steuer-Studio (früher Sonnen-CSV-Studio) – Projektgedächtnis
+# Sonnen-CSV-Studio – Projektgedächtnis
 
 Kunde: Flexisticker (Michael), Kommunikation auf **Deutsch, Du-Form**. Gleicher Kunde wie Flex-Studio (`flexisticker/tassenanimierer`),
 Arbeitsweise siehe dort: Pläne erst erklären, bei „leg los“ ohne Rückfragen bauen; am Ende kurz: was gebaut, wie bedienen, was offen;
@@ -49,6 +49,8 @@ Tageswerte in Wh, 353 Tage; Lücke 25.05.–05.06.2025 (12 Tage, wird geschätzt
 - 1.4.0 (17.10.2026): Umbenannt in **Steuer-Studio** (nur Anzeige: Titel, Kopfleiste, PDFs, Anmeldung). Bewusst unverändert: Repo
   `flexisticker/Sonnen-CSV-Studio`, Image `ghcr.io/flexisticker/sonnen-csv-studio`, Health-ID `sonnen-csv-studio`, Sicherungsnamen
   `sonnen-csv-studio-*.zip`, Unraid-Vorlage. PV-Reiter heißen jetzt PV-Übersicht/PV-Umsatzsteuer/PV-Daten (Platz für weitere Bereiche).
+- 1.4.1 (17.10.2026): Umbenennung zurückgenommen (Wunsch Kunde „wie vorher“) – heißt wieder **Sonnen-CSV-Studio**, Reiter wieder
+  Übersicht/Umsatzsteuer/Daten.
 - Bereich **Konten** (Lexware-Finanzmanager-Export → Schuldzinsen, Kontoführung Mietkonto, Kaltmiete 380 € + 150 € NK für Wohnung 2)
   wurde geplant; Kunde macht das am 17.10.2026 **separat** („wir lassen es so, wie es war“) – hier nicht bauen, außer er fragt erneut.
 - Offen/Ideen: Netze-BW-Gutschriften (tatsächliche Vergütung) erfassen, Teiltage optional schätzen, Vorjahresvergleich.
