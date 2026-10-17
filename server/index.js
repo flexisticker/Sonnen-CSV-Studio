@@ -1,4 +1,4 @@
-// Sonnen-CSV-Studio – kleiner Webserver ohne Framework
+// Steuer-Studio – kleiner Webserver ohne Framework
 import http from 'node:http'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -217,7 +217,7 @@ const server = http.createServer(async (req, res) => {
   let url
   try { url = new URL(req.url, 'http://localhost') } catch { return fail(res, 400, 'Ungültige Adresse.') }
   if (url.pathname !== '/api/health' && !authorized(req)) {
-    res.setHeader('WWW-Authenticate', 'Basic realm="Sonnen-CSV-Studio", charset="UTF-8"')
+    res.setHeader('WWW-Authenticate', 'Basic realm="Steuer-Studio", charset="UTF-8"')
     return fail(res, 401, 'Anmeldung erforderlich.')
   }
   try {
@@ -232,7 +232,7 @@ const server = http.createServer(async (req, res) => {
 })
 
 server.listen(PORT, () => {
-  console.log(`Sonnen-CSV-Studio ${VERSION} auf Port ${PORT} · Daten ${DATA_DIR} · Eingang ${IMPORT_DIR} · Sicherung ${BACKUP_DIR}${PASSWORD ? ' · Passwortschutz an' : ''}`)
+  console.log(`Steuer-Studio ${VERSION} auf Port ${PORT} · Daten ${DATA_DIR} · Eingang ${IMPORT_DIR} · Sicherung ${BACKUP_DIR}${PASSWORD ? ' · Passwortschutz an' : ''}`)
   startWatch(Number(process.env.SCAN_SECONDS || 15) * 1000, () => autoBackup({ force: true }))
   startBackups()
 })

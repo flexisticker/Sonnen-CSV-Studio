@@ -1,4 +1,6 @@
-# Sonnen-CSV-Studio
+# Steuer-Studio
+
+(früher „Sonnen-CSV-Studio“ – Repository-, Image- und Ordnernamen sind unverändert, damit bestehende Installationen weiterlaufen.)
 
 Wertet die Statistik-Exporte einer **sonnenBatterie** (CSV oder XLSX) aus. Du legst die Datei in einen Ordner, das Programm zeigt
 ein **Dashboard** und erstellt **PDF-Berichte für Steuerberater und Finanzamt**, vor allem für die **Umsatzsteuer auf den privat

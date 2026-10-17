@@ -7,7 +7,7 @@
   <Privileged>false</Privileged>
   <Support>https://github.com/flexisticker/Sonnen-CSV-Studio</Support>
   <Project>https://github.com/flexisticker/Sonnen-CSV-Studio</Project>
-  <Overview>Auswertung der sonnenBatterie-Exporte (CSV/XLSX): Dashboard, Umsatzsteuer auf den privaten Eigenverbrauch, PDF-Berichte für Steuerberater und Finanzamt.</Overview>
+  <Overview>Steuer-Studio: Unterlagen für Steuerberater und Finanzamt. Photovoltaik (sonnenBatterie-Export): Dashboard, Umsatzsteuer auf den privaten Eigenverbrauch, PDF-Berichte.</Overview>
   <Category>Tools: Productivity:</Category>
   <WebUI>http://[IP]:[PORT:8080]/</WebUI>
   <Icon>https://raw.githubusercontent.com/flexisticker/Sonnen-CSV-Studio/main/public/icon.png</Icon>

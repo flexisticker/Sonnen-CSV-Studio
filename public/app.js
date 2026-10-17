@@ -1,4 +1,4 @@
-// Sonnen-CSV-Studio – Oberfläche (ohne Framework)
+// Steuer-Studio – Oberfläche (ohne Framework)
 const $ = (s, el = document) => el.querySelector(s)
 const $$ = (s, el = document) => [...el.querySelectorAll(s)]
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
@@ -66,7 +66,7 @@ function render() {
   renderData()
   if (!dirty) renderSettings()
   const v = s.version
-  $('#foot').textContent = `Sonnen-CSV-Studio ${v.version}${v.build ? ` · Build ${v.build}` : ''}${v.commit ? ` · ${v.commit}` : ''} · Rechenhilfe, keine Steuerberatung`
+  $('#foot').textContent = `Steuer-Studio ${v.version}${v.build ? ` · Build ${v.build}` : ''}${v.commit ? ` · ${v.commit}` : ''} · Rechenhilfe, keine Steuerberatung`
 }
 
 function renderWarnings() {
