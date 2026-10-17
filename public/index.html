@@ -71,6 +71,17 @@
         <div class="table-wrap" id="files"></div>
       </div>
       <div class="card">
+        <h2>Datensicherung</h2>
+        <p>Alles, was einmal eingelesen ist, bleibt dauerhaft gespeichert – auch wenn sonnen die Daten im Portal nicht mehr anbietet.
+          Die Originaldateien liegen unverändert im Archiv. Nach jedem Import und einmal täglich (bei Änderungen) wird zusätzlich
+          eine Sicherung nach <code id="backupDir"></code> geschrieben (die letzten 30 bleiben).</p>
+        <div class="btns">
+          <a class="btn" href="/api/backup.zip">Sicherung herunterladen</a>
+          <label class="btn ghost">Sicherung einspielen<input type="file" id="restoreInput" accept=".zip" hidden></label>
+        </div>
+        <ul class="log" id="backups"></ul>
+      </div>
+      <div class="card">
         <h2>Abgleich mit den Zählerständen (Netze BW)</h2>
         <p class="muted small">Zählerstände trägst du unter Einstellungen ein. Verglichen wird die Differenz zweier Ablesungen mit der Summe der sonnen-Werte dazwischen.</p>
         <div class="table-wrap" id="meters"></div>

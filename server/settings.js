@@ -2,7 +2,7 @@
 
 export function defaultSettings() {
   return {
-    owner: { name: '', address: '', taxNo: '' },
+    owner: { name: 'Flexisticker', address: '', taxNo: '' },
     plant: {
       name: 'PV-Anlage mit sonnenBatterie',
       kwp: '',
@@ -14,7 +14,8 @@ export function defaultSettings() {
     period: 'quarter', // month | quarter | year
     method: 'feedin', // feedin = Erzeugung − Einspeisung; battery = zusätzlich ohne Batterieverluste
     estimateGaps: true,
-    prices: [], // { from, workCt (netto ct/kWh), baseEurYear (netto €/Jahr), supplier, note }
+    // { from, workCt (netto ct/kWh), baseEurYear (netto €/Jahr), supplier, note } – Startwert aus der EnBW-Rechnung 02/2024–01/2025
+    prices: [{ from: '2024-01-01', supplier: 'EnBW Grün und Sicher Privatstrom', workCt: 28.76, baseEurYear: 122.52, note: 'Rechnung 02/2024 – 01/2025' }],
     baseShare: 'grid', // Grundpreis umlegen auf: grid = Netzbezug, total = Netzbezug + Eigenverbrauch, none = nicht einrechnen
     business: [{ from: '2000-01-01', mode: 'percent', value: 0, note: '' }], // Firmenanteil am Eigenverbrauch
     feedin: [], // { from, ct } Einspeisevergütung netto ct/kWh

@@ -27,6 +27,8 @@ Tageswerte in Wh, 353 Tage; Lücke 25.05.–05.06.2025 (12 Tage, wird geschätzt
   Firmenanteil, Preis = Arbeitspreis + Grundpreis/Jahr ÷ Umlage-kWh (`baseShare` grid/total/none), Monate, Zeiträume, Jahr.
   Jahres-USt aus der Jahres-Bemessungsgrundlage (`vatPeriods` = Summe der Voranmeldungen, kann um Cent abweichen). `meterChecks()`.
 - `server/report.js` PDFs (pdfkit, Helvetica/WinAnsi → **kein U+2212 „−“ und kein „→“ in PDF-Texten**, Halbgeviertstrich nehmen).
+- `server/backup.js` ZIP-Sicherung (settings, files, archiv) nach `BACKUP_DIR` (Standard `IMPORT_DIR/sicherung`), nach jedem Import
+  und stündlich geprüft (nur bei Änderung, je Tag eine Datei, 30 behalten); `GET /api/backup.zip`, `POST /api/restore` (sichert vorher).
 - `server/watch.js` Eingangsordner (`IMPORT_DIR`), Datei erst bei gleicher Größe in zwei Durchläufen.
 - `server/index.js` HTTP ohne Framework, optional Basic-Auth (`PASSWORD`), CSRF-Kopf `X-Sonnen-Studio: 1`, CSP ohne Inline-Styles
   (**keine `style="…"`-Attribute in `public/app.js`**, Klassen nutzen).
@@ -37,4 +39,6 @@ Tageswerte in Wh, 353 Tage; Lücke 25.05.–05.06.2025 (12 Tage, wird geschätzt
 
 - 1.0.0 (17.10.2026): Erstversion. Getestet mit der echten 2025er-Datei (lokal, Playwright 1280/390 px, PDFs angesehen).
   **Nicht getestet:** echte XLSX von sonnen, Unraid-Container, Zählerabgleich mit echten Netze-BW-Ständen.
+- 1.1.0 (17.10.2026): Wunsch Kunde „Daten immer haben“ → automatische Sicherung + Download/Einspielen; Startwerte EnBW-Preis und
+  Name Flexisticker (gelten nur, solange noch keine `settings.json` existiert). Ohne Firmenanteil ergibt 2025: 276,24 € USt.
 - Offen/Ideen: Netze-BW-Gutschriften (tatsächliche Vergütung) erfassen, Teiltage optional schätzen, Vorjahresvergleich.

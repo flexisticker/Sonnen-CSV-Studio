@@ -28,6 +28,8 @@ function moveTo(dir, file) {
   return target
 }
 
+let onImport = null
+
 export async function scan() {
   let entries
   try {
@@ -47,6 +49,7 @@ export async function scan() {
     try {
       const res = await importBuffer(e.name, fs.readFileSync(full), 'ordner')
       moveTo(DONE, full)
+      if (!res.duplicate && onImport) onImport()
       note({ name: e.name, ok: true, text: res.duplicate ? 'schon eingelesen – verschoben' : `${res.file.days} Tage eingelesen (${res.file.from} bis ${res.file.to})` })
     } catch (err) {
       try {
@@ -58,7 +61,8 @@ export async function scan() {
   }
 }
 
-export function startWatch(intervalMs = 15000) {
+export function startWatch(intervalMs = 15000, cb = null) {
+  onImport = cb
   scan()
   return setInterval(scan, intervalMs)
 }

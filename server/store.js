@@ -46,6 +46,10 @@ export function listFiles() {
 
 let merged = null
 
+export function resetCache() {
+  merged = null
+}
+
 // Alle Dateien zusammenführen. Gibt es einen Tag in mehreren Dateien, gilt der vollständigere
 // (größere Summe aller Werte) – so ersetzt ein späterer Export einen am selben Tag gezogenen Teiltag.
 export function readings() {

@@ -19,6 +19,8 @@ verbrauchten Solarstrom** (unentgeltliche Wertabgabe, § 3 Abs. 1b UStG).
   Der Grundpreis wird wahlweise auf den Netzbezug oder auf Netzbezug + Eigenverbrauch umgelegt oder weggelassen.
 - **Datenqualität:** fehlende Tage werden erkannt; Lücken innerhalb der Daten werden aus den Nachbartagen geschätzt und gekennzeichnet.
   Teiltage (Ausfall) und Laden der Batterie aus dem Netz werden gemeldet. Abgleich mit Zählerständen (Netze BW).
+- **Daten bleiben:** alles Eingelesene wird dauerhaft gespeichert (Originale im Archiv), Ergebnisse jederzeit für jedes Jahr abrufbar.
+  Nach jedem Import und täglich bei Änderungen eine ZIP-Sicherung nach `/import/sicherung` (letzte 30), dazu Download/Einspielen in der Oberfläche.
 - **Berichte:** Jahresbericht (PDF), Voranmeldung je Zeitraum (PDF), CSV-Export (Monate/Tage, für Excel).
   Im Jahresbericht stehen Methode, Preise, Pauschale, Schätzungen, Zählerabgleich und die SHA-256-Prüfsummen der eingelesenen Dateien.
 
@@ -48,6 +50,7 @@ Docker → **Add Container**:
 | Pfad `/import` | `/mnt/user/flexisticker/pv-eingang` (hierhin die sonnen-Exporte legen) |
 | Variable `PASSWORD` | optional: Passwort für die Anmeldung (Benutzer `admin`, änderbar mit `APP_USER`) |
 | Variable `TZ` | `Europe/Berlin` (Standard) |
+| Variable `BACKUP_DIR` | optional, Standard `/import/sicherung` (liegt damit auf dem Array und ist im Explorer sichtbar) |
 
 Danach im Browser `http://<unraid-ip>:8095/` öffnen. Der Eingangsordner ist im Windows-Explorer z. B. unter
 `\\PowerServer\flexisticker\pv-eingang` erreichbar.
@@ -60,7 +63,7 @@ Wie alles im Heimnetz: nicht ohne Passwort/Zugriffsliste ins Internet freigeben.
 ## Erste Einrichtung
 
 1. **Einstellungen → Anlage:** Inbetriebnahme, Vorsteuer beim Kauf gezogen, „Privaten Eigenverbrauch der Umsatzsteuer unterwerfen“.
-2. **Strompreise:** von der Rechnung des Lieferanten (Beispiel EnBW: Arbeitspreis 28,76 ct/kWh, Grundpreis 122,52 €/Jahr, jeweils netto).
+2. **Strompreise:** von der Rechnung des Lieferanten. Startwert ist EnBW ab 01.01.2024 (28,76 ct/kWh, 122,52 €/Jahr, netto) – bei Preisänderung neue Zeile.
 3. **Firmenanteil:** die mit dem Steuerberater abgestimmte Pauschale (% des Eigenverbrauchs oder feste kWh je Jahr).
 4. **Voranmeldung:** monatlich / vierteljährlich.
 5. Optional: Einspeisevergütung, Zählerstände von Netze BW.

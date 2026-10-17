@@ -7,6 +7,7 @@ import { getSettings, saveSettings, listFiles, readings, importBuffer, removeFil
 import { analyzeYear, meterChecks, yearsOf, localToday, fmtDate } from './calc.js'
 import { yearReport, periodReport } from './report.js'
 import { startWatch, scan, log as importLog, IMPORT_DIR } from './watch.js'
+import { makeZip, restoreZip, autoBackup, startBackups, listBackups, BACKUP_DIR } from './backup.js'
 import { VERSION, BUILD, COMMIT } from './version.js'
 
 const PORT = Number(process.env.PORT || 8080)
@@ -130,6 +131,8 @@ async function api(req, res, url) {
       meters: meterChecks(days, s),
       files: listFiles().slice().reverse(),
       importDir: IMPORT_DIR,
+      backupDir: BACKUP_DIR,
+      backups: listBackups().slice(0, 5),
       importLog
     })
   }
@@ -147,6 +150,7 @@ async function api(req, res, url) {
     const buf = await readBody(req, 30 << 20)
     try {
       const r = await importBuffer(name, buf, 'upload')
+      if (!r.duplicate) autoBackup({ force: true })
       return send(res, 200, r)
     } catch (e) {
       return fail(res, 400, e.message)
@@ -158,6 +162,19 @@ async function api(req, res, url) {
     await new Promise((r) => setTimeout(r, 1200))
     await scan()
     return send(res, 200, { ok: true, log: importLog })
+  }
+
+  if (p === '/api/backup.zip' && req.method === 'GET') {
+    res.setHeader('Content-Disposition', `attachment; filename="sonnen-csv-studio-${localToday()}.zip"`)
+    return send(res, 200, await makeZip(), 'application/zip')
+  }
+  if (p === '/api/restore' && req.method === 'POST') {
+    const buf = await readBody(req, 200 << 20)
+    try {
+      return send(res, 200, await restoreZip(buf))
+    } catch (e) {
+      return fail(res, 400, e.message)
+    }
   }
 
   let m = p.match(/^\/api\/files\/([a-f0-9]{64})$/)
@@ -211,6 +228,7 @@ const server = http.createServer(async (req, res) => {
 })
 
 server.listen(PORT, () => {
-  console.log(`Sonnen-CSV-Studio ${VERSION} auf Port ${PORT} · Daten ${DATA_DIR} · Eingang ${IMPORT_DIR}${PASSWORD ? ' · Passwortschutz an' : ''}`)
-  startWatch(Number(process.env.SCAN_SECONDS || 15) * 1000)
+  console.log(`Sonnen-CSV-Studio ${VERSION} auf Port ${PORT} · Daten ${DATA_DIR} · Eingang ${IMPORT_DIR} · Sicherung ${BACKUP_DIR}${PASSWORD ? ' · Passwortschutz an' : ''}`)
+  startWatch(Number(process.env.SCAN_SECONDS || 15) * 1000, () => autoBackup({ force: true }))
+  startBackups()
 })

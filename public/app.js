@@ -249,6 +249,10 @@ function renderData() {
     toast('Datei entfernt.')
     load()
   }))
+  $('#backupDir').textContent = s.backupDir
+  $('#backups').innerHTML = s.backups.length
+    ? s.backups.map((b) => `<li>${esc(new Date(b.at).toLocaleString('de-DE'))} · ${esc(b.name)} · ${(b.size / 1024).toLocaleString('de-DE', { maximumFractionDigits: 0 })} KB</li>`).join('')
+    : '<li class="muted">Noch keine automatische Sicherung.</li>'
   const pctTxt = (d) => (d == null ? '–' : `<span class="badge ${Math.abs(d) > 0.03 ? 'error' : 'ok'}">${fmtPct(d)}</span>`)
   const num = (n) => (n == null ? '–' : n.toLocaleString('de-DE', { maximumFractionDigits: 1 }))
   $('#meters').innerHTML = s.meters.length
@@ -274,6 +278,21 @@ $('#fileInput').addEventListener('change', (e) => upload([...e.target.files]))
 drop.addEventListener('dragover', (e) => { e.preventDefault(); drop.classList.add('over') })
 drop.addEventListener('dragleave', () => drop.classList.remove('over'))
 drop.addEventListener('drop', (e) => { e.preventDefault(); drop.classList.remove('over'); upload([...e.dataTransfer.files]) })
+$('#restoreInput').addEventListener('change', async (e) => {
+  const f = e.target.files[0]
+  e.target.value = ''
+  if (!f || !confirm('Sicherung einspielen? Der aktuelle Stand wird vorher automatisch gesichert.')) return
+  try {
+    const r = await fetch('/api/restore', { method: 'POST', headers: { 'X-Sonnen-Studio': '1' }, body: f })
+    const d = await r.json()
+    if (!r.ok) throw new Error(d.error)
+    dirty = false
+    toast(`Sicherung eingespielt (${d.files} Dateien).`)
+    load()
+  } catch (err) {
+    toast(err.message)
+  }
+})
 $('#scanBtn').addEventListener('click', async (e) => {
   e.target.disabled = true
   try { await api('/api/scan', { method: 'POST' }); toast('Eingangsordner geprüft.'); await load() } catch (err) { toast(err.message) }
