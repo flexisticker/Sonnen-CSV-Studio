@@ -50,5 +50,5 @@ Tageswerte in Wh, 353 Tage; Lücke 25.05.–05.06.2025 (12 Tage, wird geschätzt
   `flexisticker/Sonnen-CSV-Studio`, Image `ghcr.io/flexisticker/sonnen-csv-studio`, Health-ID `sonnen-csv-studio`, Sicherungsnamen
   `sonnen-csv-studio-*.zip`, Unraid-Vorlage. PV-Reiter heißen jetzt PV-Übersicht/PV-Umsatzsteuer/PV-Daten (Platz für weitere Bereiche).
 - Bereich **Konten** (Lexware-Finanzmanager-Export → Schuldzinsen, Kontoführung Mietkonto, Kaltmiete 380 € + 150 € NK für Wohnung 2)
-  wurde geplant, aber am 17.10.2026 vom Kunden **verworfen** („wir lassen es so, wie es war“) – nicht bauen, außer er fragt erneut.
+  wurde geplant; Kunde macht das am 17.10.2026 **separat** („wir lassen es so, wie es war“) – hier nicht bauen, außer er fragt erneut.
 - Offen/Ideen: Netze-BW-Gutschriften (tatsächliche Vergütung) erfassen, Teiltage optional schätzen, Vorjahresvergleich.
