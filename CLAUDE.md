@@ -44,4 +44,6 @@ Tageswerte in Wh, 353 Tage; Lücke 25.05.–05.06.2025 (12 Tage, wird geschätzt
 - 1.2.0 (17.10.2026): Knopf „Datei hochladen“ in der Kopfleiste + Ziehen ins ganze Fenster (springt danach zur Übersicht/zum Jahr).
   Unraid-WebUI: Labels `net.unraid.docker.webui/icon` im Dockerfile, Vorlage `unraid/sonnen-csv-studio.xml`, Icon `public/icon.png`
   (aus icon.svg gerendert). Ein schon angelegter Container übernimmt WebUI nur über die Vorlage bzw. Advanced View → WebUI.
+- 1.3.0 (17.10.2026): Jahresauswahl immer aktuelles Jahr bis 2000 (`yearsOf`, `FIRST_YEAR`), Jahre mit Daten mit ✓ (`dataYears`);
+  ohne Auswahl neuestes Jahr mit Daten, sonst Vorjahr; Auswahl je Browser gemerkt (`localStorage scs-year`).
 - Offen/Ideen: Netze-BW-Gutschriften (tatsächliche Vergütung) erfassen, Teiltage optional schätzen, Vorjahresvergleich.

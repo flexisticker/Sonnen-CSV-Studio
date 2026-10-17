@@ -19,6 +19,7 @@ const SERIES = [
 
 let state = null
 let year = null
+try { year = +localStorage.getItem('scs-year') || null } catch {}
 let dirty = false
 
 function toast(msg) {
@@ -39,6 +40,7 @@ async function api(path, opts = {}) {
 async function load() {
   state = await api('/api/state' + (year ? `?year=${year}` : ''))
   year = state.year
+  try { localStorage.setItem('scs-year', year) } catch {}
   render()
 }
 
@@ -54,7 +56,8 @@ $('#year').addEventListener('change', (e) => { year = +e.target.value; load() })
 
 function render() {
   const s = state
-  $('#year').innerHTML = s.years.map((y) => `<option ${y === s.year ? 'selected' : ''}>${y}</option>`).join('')
+  // Jahre mit Daten mit Haken
+  $('#year').innerHTML = s.years.map((y) => `<option value="${y}" ${y === s.year ? 'selected' : ''}>${y}${s.dataYears.includes(y) ? ' ✓' : ''}</option>`).join('')
   renderWarnings()
   renderTiles()
   renderChart()

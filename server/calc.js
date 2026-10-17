@@ -295,8 +295,17 @@ export function meterChecks(days, s) {
   return out
 }
 
+export const FIRST_YEAR = 2000
+
+// Jahre mit Daten (absteigend)
+export function dataYearsOf(days) {
+  return [...new Set(Object.keys(days).map((d) => +d.slice(0, 4)))].sort((a, b) => b - a)
+}
+
+// Auswahl: aktuelles Jahr bis 2000 (rückwirkend immer wählbar), dazu ältere Jahre mit Daten
 export function yearsOf(days, today = localToday()) {
-  const ys = new Set(Object.keys(days).map((d) => +d.slice(0, 4)))
-  if (!ys.size) ys.add(+today.slice(0, 4))
+  const cur = +today.slice(0, 4)
+  const ys = new Set(dataYearsOf(days))
+  for (let y = cur; y >= FIRST_YEAR; y--) ys.add(y)
   return [...ys].sort((a, b) => b - a)
 }

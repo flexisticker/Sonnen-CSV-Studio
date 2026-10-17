@@ -109,3 +109,12 @@ test('Zählerabgleich', () => {
 })
 
 function round(n) { return Math.round(n * 100) / 100 }
+
+test('Jahresauswahl: aktuelles Jahr bis 2000, ältere Jahre mit Daten zusätzlich', async () => {
+  const { yearsOf, dataYearsOf } = await import('../server/calc.js')
+  const ys = yearsOf({ '1999-05-01': {}, '2025-01-01': {} }, '2026-10-17')
+  assert.equal(ys[0], 2026)
+  assert.ok(ys.includes(2000) && ys.includes(2025) && ys.includes(1999))
+  assert.equal(ys.length, 28)
+  assert.deepEqual(dataYearsOf({ '2024-01-01': {}, '2025-03-01': {} }), [2025, 2024])
+})

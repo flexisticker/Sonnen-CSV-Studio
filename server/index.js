@@ -4,7 +4,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import crypto from 'node:crypto'
 import { getSettings, saveSettings, listFiles, readings, importBuffer, removeFile, DATA_DIR } from './store.js'
-import { analyzeYear, meterChecks, yearsOf, localToday, fmtDate } from './calc.js'
+import { analyzeYear, meterChecks, yearsOf, dataYearsOf, localToday, fmtDate } from './calc.js'
 import { yearReport, periodReport } from './report.js'
 import { startWatch, scan, log as importLog, IMPORT_DIR } from './watch.js'
 import { makeZip, restoreZip, autoBackup, startBackups, listBackups, BACKUP_DIR } from './backup.js'
@@ -65,8 +65,11 @@ function analysis(year) {
   const days = readings()
   const today = localToday()
   const years = yearsOf(days, today)
-  const y = Number(year) || years[0]
-  return { s, days, years, a: analyzeYear(y, days, s, today) }
+  const dataYears = dataYearsOf(days)
+  // ohne Auswahl: neuestes Jahr mit Daten, sonst das Vorjahr (für die Steuer meist gesucht)
+  let y = Number(year)
+  if (!years.includes(y)) y = dataYears[0] || +today.slice(0, 4) - 1
+  return { s, days, years, dataYears, a: analyzeYear(y, days, s, today) }
 }
 
 // CSV für Excel (Semikolon, Dezimalkomma, BOM)
@@ -113,12 +116,13 @@ async function api(req, res, url) {
   if (p === '/api/health') return send(res, 200, { ok: true, app: 'sonnen-csv-studio', version: VERSION })
 
   if (p === '/api/state' && req.method === 'GET') {
-    const { s, days, years, a } = analysis(url.searchParams.get('year'))
+    const { s, days, years, dataYears, a } = analysis(url.searchParams.get('year'))
     const slim = a.days.map((d) => (d.future || d.gap || d.missing ? { date: d.date, none: true } : { date: d.date, p: d.p, c: d.c, f: d.f, g: d.g, ev: d.ev, est: !!d.est, partial: !!d.partial, gridCharge: !!d.gridCharge }))
     return send(res, 200, {
       version: { version: VERSION, build: BUILD, commit: COMMIT },
       settings: s,
       years,
+      dataYears,
       year: a.year,
       today: a.today,
       months: a.months,

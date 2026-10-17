@@ -12,6 +12,7 @@ verbrauchten Solarstrom** (unentgeltliche Wertabgabe, § 3 Abs. 1b UStG).
 - **Hochladen:** Knopf „Datei hochladen“ oben rechts oder Datei einfach ins Fenster ziehen – danach springt die Übersicht auf das Jahr der Datei.
 - **Eingangsordner:** neue CSV/XLSX werden automatisch eingelesen und nach `erledigt/` verschoben (fehlerhafte nach `fehler/`, mit Grund als `.txt`).
   Alternativ per Drag & Drop in der Oberfläche. Doppelte Dateien werden erkannt, überlappende Zeiträume nicht doppelt gezählt.
+- **Jahre:** jedes Jahr ab 2000 auswählbar (rückwirkend), Jahre mit Daten sind mit ✓ markiert.
 - **Dashboard:** Erzeugung, Eigenverbrauch, Einspeisung, Netzbezug, Autarkie, Eigenverbrauchsquote, Umsatzsteuer; Monatsdiagramm
   (mit Tabellenansicht) und Tagesverlauf.
 - **Umsatzsteuer:** je Voranmeldungszeitraum (Monat/Quartal/Jahr) und für das Jahr:
