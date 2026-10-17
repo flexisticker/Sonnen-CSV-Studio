@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sonnen-CSV-Studio</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><img src="icon.svg" alt="" width="28" height="28"><span>Sonnen-CSV-Studio</span></div>
+    <nav class="tabs" role="tablist">
+      <button data-tab="overview" class="active">Übersicht</button>
+      <button data-tab="tax">Umsatzsteuer</button>
+      <button data-tab="data">Daten</button>
+      <button data-tab="settings">Einstellungen</button>
+    </nav>
+    <label class="year">Jahr <select id="year"></select></label>
+  </header>
+
+  <main>
+    <section id="tab-overview" class="tab active">
+      <div id="warnings"></div>
+      <div class="tiles" id="tiles"></div>
+      <div class="card">
+        <div class="card-head">
+          <h2>Monatswerte (kWh)</h2>
+          <button class="btn small ghost" id="toggleTable" aria-pressed="false">Tabelle</button>
+        </div>
+        <div class="legend" id="legend"></div>
+        <div class="chart-wrap" id="chart"></div>
+        <div id="chartTable" class="table-wrap" hidden></div>
+      </div>
+      <div class="card">
+        <h2>Tagesverlauf Erzeugung (kWh)</h2>
+        <p class="muted small">Geschätzte Tage gestrichelt umrandet, fehlende Tage leer.</p>
+        <div class="chart-wrap" id="daily"></div>
+      </div>
+    </section>
+
+    <section id="tab-tax" class="tab">
+      <div id="taxInfo"></div>
+      <div class="card">
+        <div class="card-head">
+          <h2>Voranmeldungszeiträume</h2>
+          <div class="btns">
+            <a class="btn" id="yearPdf">Jahresbericht (PDF)</a>
+            <a class="btn ghost" id="csvMonths">CSV Monate</a>
+            <a class="btn ghost" id="csvDays">CSV Tage</a>
+          </div>
+        </div>
+        <div class="table-wrap" id="periods"></div>
+        <p class="muted small">Die Bemessungsgrundlage gehört in ELSTER zu den Umsätzen zum Steuersatz 19 % (Kz. 81), zusammen mit den übrigen Umsätzen deines Unternehmens. Rechenhilfe, keine Steuerberatung.</p>
+      </div>
+    </section>
+
+    <section id="tab-data" class="tab">
+      <div class="card">
+        <h2>Dateien einlesen</h2>
+        <p>Lege den sonnen-Export (CSV oder XLSX) in den Eingangsordner <code id="importDir"></code> – er wird automatisch eingelesen. Oder hier hineinziehen:</p>
+        <label class="drop" id="drop">
+          <input type="file" id="fileInput" accept=".csv,.xlsx" multiple hidden>
+          <span>Datei hierher ziehen oder <u>auswählen</u></span>
+        </label>
+        <div class="btns"><button class="btn ghost" id="scanBtn">Eingangsordner jetzt prüfen</button></div>
+        <ul class="log" id="importLog"></ul>
+      </div>
+      <div class="card">
+        <h2>Eingelesene Dateien</h2>
+        <div class="table-wrap" id="files"></div>
+      </div>
+      <div class="card">
+        <h2>Abgleich mit den Zählerständen (Netze BW)</h2>
+        <p class="muted small">Zählerstände trägst du unter Einstellungen ein. Verglichen wird die Differenz zweier Ablesungen mit der Summe der sonnen-Werte dazwischen.</p>
+        <div class="table-wrap" id="meters"></div>
+      </div>
+    </section>
+
+    <section id="tab-settings" class="tab">
+      <form id="settingsForm" autocomplete="off"></form>
+    </section>
+  </main>
+
+  <footer class="foot" id="foot"></footer>
+  <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+  <div class="toast" id="toast" hidden></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
